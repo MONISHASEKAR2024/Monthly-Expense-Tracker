@@ -1,0 +1,24 @@
+&nbsp;<h1>MONTHLY EXPENSE TRACKER</h1>
+
+<h3>Amount</h3>
+<input  type="number"  [(ngModel)]="Amount" (keydown)="preventnegative($event)"> &nbsp;
+<h3>Description</h3>
+<input  type="text" [(ngModel)]="Description"> &nbsp;
+
+<button (click)="onclick()">Add Expense</button>
+
+<h3> Expenses List</h3>
+
+<div *ngIf="expense.length>0;" >
+<ul>
+    <li *ngFor="let item of expense">
+        ₹{{item.Amount}}- {{item.Description}}
+    </li>
+    <h3>Total:₹{{getTotal()}}</h3>
+</ul>
+</div>
+
+
+<!-- <ng-template #noExpense>
+    <p>No expenses added yet.</p>
+  </ng-template> -->
