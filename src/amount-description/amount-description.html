@@ -1,22 +1,56 @@
-&nbsp;<h1>MONTHLY EXPENSE TRACKER</h1>
+<div class="tracker-container">
 
-<h3>Amount</h3>
+&nbsp;<h1>MONTHLY EXPENSES TRACKER</h1>
+
+<h3 style="width: 300px; font-size: 16px; ">Amount</h3>
 <input  type="number"  [(ngModel)]="Amount" (keydown)="preventnegative($event)"> &nbsp;
-<h3>Description</h3>
+<h3 style="width: 300px; font-size: 16px;"> Description</h3>
 <input  type="text" [(ngModel)]="Description"> &nbsp;
 
-<button (click)="onclick()">Add Expense</button>
+<button (click)="onclick()" style="background-color: rgb(150, 220, 20);;">Add Expense</button>
 
-<h3> Expenses List</h3>
+<h3 style="color: rgb(238, 90, 5);"> Expenses List</h3>
 
 <div *ngIf="expense.length>0;" >
-<ul>
+    <table class="expense-table" border="1" [cellPadding]="8" [cellSpacing]="0">
+
+<!-- <ul>
     <li *ngFor="let item of expense">
         ₹{{item.Amount}}- {{item.Description}}
     </li>
     <h3>Total:₹{{getTotal()}}</h3>
-</ul>
+</ul> -->
+   <thead>
+    <tr>
+        <th> Actions</th>
+        <th> S.No</th>
+        <th> Amount</th>
+        <th> Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let item of expense; let i = index">
+        <td>
+            <button (click)="OnEdit(i)">Edit</button>
+            <button (click)="OnDelete(i)">Delete</button>
+        </td>
+        <td>{{i+1}}</td>
+        <td>{{item.Amount}}</td>
+        <td>{{item.Description}}</td>
+    </tr>
+    <tr>
+        <td colspan="1"><strong>Total</strong> </td>
+        <td></td>
+        <td colspan="1"><strong> ₹{{getTotal()}}</strong></td>
+    </tr>
+   </tbody>
+</table>
+
+</div><br>
+
+<button (click)="OnSave()" [disabled]="expense.length === 0" style="background-color: rgb(150, 220, 20);">Save</button>
 </div>
+
 
 
 <!-- <ng-template #noExpense>
