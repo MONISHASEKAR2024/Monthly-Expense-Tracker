@@ -1,0 +1,65 @@
+<div class="Marks">
+    <h1>STUDENTS MARKS MANAGER</h1>
+    <div class="fields">
+        <div style="display: flex; gap: 20px;" >
+        <h3>Name:</h3>
+        <input type="text" [(ngModel)]="name" style="height: 35px;  width: 200px;">&nbsp;
+        <h3>Section:</h3>
+        <select name="dropdown" [(ngModel)]="subject">
+            <option value="">Select a section</option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+        </select> &nbsp;
+        </div>
+        <div style="display: flex; gap: 20px;">
+        <h3>Subject:</h3>
+        <select name="dropdown" [(ngModel)]="section">
+            <option value="">Select a section</option>
+            <option value="tamil">Tamil</option>
+            <option value="eng">English</option>
+            <option value="mat">Maths</option>
+            <option value="science">Science</option>
+            <option value="social">Social</option>
+        </select>
+        
+        <h3>Marks:</h3>
+        <input type="number" [(ngModel)]="marks" (keydown)="preventnegative($event)" style="height: 35px; width: 200px;"> 
+       </div>
+        <br>
+
+        <button (click)="OnAdd()">Add</button>
+    </div>
+
+    <div *ngIf="student.length>0">
+    <table class="studentdetails" border="1" [cellPadding]="8" [cellSpacing]="0">
+    <thead >
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of student; let i=index">
+            <td> {{i+1}}</td>
+            <td> {{item.name}}</td>
+            <td> {{item.section}} </td>
+            <td> {{item.subject}} </td>
+            <td> {{item.marks}} </td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> <strong>₹ {{getTotal()}}</strong> </td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+
+</div>
